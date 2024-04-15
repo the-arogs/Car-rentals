@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import { NavigationContainer } from '@react-navigation/native';
+import SignInScreen from './screens/SignInScreen';
+import Search from './screens/Search';
+import Logout from './screens/Logout';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './screens/HomeScreen'
+import Reservation from './screens/reservation'
+
+
+// Obtain instance of navigation stack
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function Home() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="HomeScreen" component={Search} />
+      <Tab.Screen name="Reservations" component={HomeScreen} />
+      <Tab.Screen name="Logout" component={Logout} />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen
+          name="HomeScreen"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen name="Your Reservation" component={Reservation} /> 
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
