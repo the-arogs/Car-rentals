@@ -9,7 +9,6 @@ const HomeScreen = () => {
 
   const navigation = useNavigation();
   const [cars, setData] = useState([]);
-  // AIzaSyDfAaTwDOjm_OnbVnDK3UDD-iVgJMcD81U
   useEffect(() => {
     fetchCars();
   }, []);
